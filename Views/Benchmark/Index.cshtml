@@ -1,0 +1,131 @@
+@model ASVSSECURITYAUDITOR.Models.BenchmarkViewModel
+
+<div class="container mt-5">
+
+    <h1 class="fw-bold mb-5">
+        Benchmark Analysis Report
+    </h1>
+
+    <div class="row g-4 mb-5">
+
+        <div class="col-md-4">
+
+            <div class="card shadow border-0">
+
+                <div class="card-body text-center">
+
+                    <h5>Compliance</h5>
+
+                    <h1 class="fw-bold text-success">
+                        @Model.CompliancePercentage%
+                    </h1>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="card shadow border-0">
+
+                <div class="card-body text-center">
+
+                    <h5>Risk Level</h5>
+
+                    <h1 class="fw-bold text-danger">
+                        @Model.RiskLevel
+                    </h1>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+
+            <div class="card shadow border-0">
+
+                <div class="card-body text-center">
+
+                    <h5>Maturity Level</h5>
+
+                    <h1 class="fw-bold text-primary">
+                        @Model.MaturityLevel
+                    </h1>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="card shadow-lg border-0">
+
+        <div class="card-body">
+
+            <h3 class="fw-bold mb-4">
+                Chapter Analysis
+            </h3>
+
+            <table class="table table-hover">
+
+                <thead class="table-dark">
+
+                    <tr>
+                        <th>Chapter</th>
+                        <th>Total</th>
+                        <th>Valid</th>
+                        <th>Compliance</th>
+                        <th>Recommendation</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                @foreach(var chapter in Model.Chapters)
+                {
+                    <tr>
+
+                        <td>@chapter.Chapter</td>
+
+                        <td>@chapter.Total</td>
+
+                        <td>@chapter.Valid</td>
+
+                        <td>
+
+                            <div class="progress">
+
+                                <div class="progress-bar"
+                                     style="width:@chapter.Percentage%">
+
+                                    @chapter.Percentage%
+
+                                </div>
+
+                            </div>
+
+                        </td>
+
+                        <td>
+                            @chapter.Recommendation
+                        </td>
+
+                    </tr>
+                }
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
