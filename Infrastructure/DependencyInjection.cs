@@ -10,6 +10,7 @@ namespace ASVSSECURITYAUDITOR.Infrastructure
         {
             services.AddScoped<ICsvImportService, CsvImportService>();
             services.AddScoped<IAIExplanationService,OpenAIExplanationService>();
+            services.AddScoped<IPdfReportService,PdfReportService>();
 
             return services;
         }

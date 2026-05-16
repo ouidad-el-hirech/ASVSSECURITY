@@ -2,8 +2,11 @@ using Microsoft.EntityFrameworkCore;
 using ASVSSECURITYAUDITOR.Infrastructure.Data;
 using ASVSSECURITYAUDITOR.Infrastructure;
 using Microsoft.AspNetCore.Identity;
+using QuestPDF.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
+
+QuestPDF.Settings.License = LicenseType.Community;
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddDefaultIdentity<IdentityUser>(options =>
