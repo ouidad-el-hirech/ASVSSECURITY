@@ -1,0 +1,49 @@
+@model IEnumerable<ASVSSECURITYAUDITOR.Core.Entities.ASVSRequirement>
+
+<div class="container mt-5">
+
+    <div class="d-flex justify-content-between mb-4">
+        <h2>OWASP ASVS Requirements</h2>
+
+        <a class="btn btn-dark"
+           href="/Admin/Import">
+            Import CSV
+        </a>
+    </div>
+
+    <div class="card shadow-lg">
+
+        <div class="card-body">
+
+            <table class="table table-hover">
+
+                <thead class="table-dark">
+                    <tr>
+                        <th>Code</th>
+                        <th>Chapter</th>
+                        <th>Title</th>
+                        <th>Level</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                @foreach(var item in Model)
+                {
+                    <tr>
+                        <td>@item.RequirementCode</td>
+                        <td>@item.Chapter</td>
+                        <td>@item.Title</td>
+                        <td>@item.Level</td>
+                    </tr>
+                }
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>

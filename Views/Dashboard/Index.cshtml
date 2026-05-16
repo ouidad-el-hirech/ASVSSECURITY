@@ -1,0 +1,121 @@
+@model ASVSSECURITYAUDITOR.Models.DashboardViewModel
+
+<div class="container mt-5">
+
+    <h1 class="fw-bold mb-5">
+        Security Dashboard
+    </h1>
+
+    <div class="row g-4">
+
+        <div class="col-md-3">
+
+            <div class="card shadow border-0">
+
+                <div class="card-body text-center">
+
+                    <h5>Total Requirements</h5>
+
+                    <h1 class="fw-bold">
+                        @Model.TotalRequirements
+                    </h1>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3">
+
+            <div class="card shadow border-0">
+
+                <div class="card-body text-center">
+
+                    <h5>Compliance</h5>
+
+                    <h1 class="fw-bold text-success">
+                        @Model.CompliancePercentage%
+                    </h1>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3">
+
+            <div class="card shadow border-0">
+
+                <div class="card-body text-center">
+
+                    <h5>Valid</h5>
+
+                    <h1 class="fw-bold text-primary">
+                        @Model.ValidCount
+                    </h1>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3">
+
+            <div class="card shadow border-0">
+
+                <div class="card-body text-center">
+
+                    <h5>Risk Level</h5>
+
+                    <h1 class="fw-bold text-danger">
+                        @Model.RiskLevel
+                    </h1>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="card mt-5 shadow border-0">
+
+        <div class="card-body">
+
+            <canvas id="securityChart"></canvas>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    const ctx = document.getElementById('securityChart');
+
+    new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+            labels: [
+                'Valid',
+                'Not Valid',
+                'Pending',
+                'Not Applicable'
+            ],
+            datasets: [{
+                data: [
+                    @Model.ValidCount,
+                    @Model.NotValidCount,
+                    @Model.PendingCount,
+                    @Model.NotApplicableCount
+                ]
+            }]
+        }
+    });
+</script>

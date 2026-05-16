@@ -1,0 +1,11 @@
+RequirementCode,Chapter,Title,Description,Level
+V1.1,Architecture,Secure Design,Verify secure software architecture,L1
+V1.2,Architecture,Threat Modeling,Verify threat modeling process,L2
+V2.1,Authentication,Password Security,Verify password length and complexity,L1
+V2.2,Authentication,MFA,Verify multi-factor authentication,L2
+V3.1,Session Management,Session Timeout,Verify session expiration,L1
+V4.1,Access Control,Role Validation,Verify role-based access control,L2
+V5.1,Validation,Input Validation,Verify server-side input validation,L1
+V6.1,Cryptography,Encryption,Verify strong encryption algorithms,L3
+V7.1,Error Handling,Error Messages,Verify generic error messages,L1
+V8.1,Data Protection,Sensitive Data,Verify protection of sensitive data,L2

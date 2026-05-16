@@ -1,0 +1,31 @@
+<div class="container mt-5">
+
+    <div class="card shadow-lg p-4">
+
+        <h2 class="mb-4">
+            Import OWASP ASVS CSV
+        </h2>
+
+        <form method="post"
+              enctype="multipart/form-data">
+
+            <input type="file"
+                   name="file"
+                   class="form-control mb-3" />
+
+            <button class="btn btn-dark">
+                Import
+            </button>
+
+        </form>
+
+        @if(ViewBag.Message != null)
+        {
+            <div class="alert alert-success mt-3">
+                @ViewBag.Message
+            </div>
+        }
+
+    </div>
+
+</div>

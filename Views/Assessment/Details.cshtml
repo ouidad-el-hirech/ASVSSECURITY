@@ -1,0 +1,186 @@
+@model ASVSSECURITYAUDITOR.Core.Entities.Assessment
+
+<div class="container mt-5">
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+
+        <h2 class="fw-bold">
+            @Model.Name
+        </h2>
+
+        <div class="d-flex gap-2">
+
+            <a href="/Requirements"
+               class="btn btn-outline-dark">
+                Requirements
+            </a>
+
+            <a href="/Dashboard/Index/@Model.Id"
+               class="btn btn-dark">
+                Dashboard
+            </a>
+
+            <a href="/Benchmark/Index/@Model.Id"
+               class="btn btn-outline-primary">
+                Benchmark
+            </a>
+
+        </div>
+
+    </div>
+
+    <div class="card shadow-lg border-0">
+
+        <div class="card-body">
+
+            <table class="table table-hover align-middle">
+
+                <thead class="table-dark">
+
+                    <tr>
+                        <th>Code</th>
+                        <th>Requirement</th>
+                        <th>Status</th>
+                        <th>Notes</th>
+                        <th>Save</th>
+                        <th>AI</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                @foreach (var item in Model.Items)
+                {
+                    <tr>
+
+                        <form method="post"
+                              action="/Assessment/UpdateStatus">
+
+                            <td>
+                                @item.ASVSRequirement.RequirementCode
+                            </td>
+
+                            <td>
+                                @item.ASVSRequirement.Title
+                            </td>
+
+                            <td>
+
+                                <input type="hidden"
+                                       name="itemId"
+                                       value="@item.Id" />
+
+                                <select name="status"
+                                        class="form-select">
+
+                                    <option value="Pending">
+                                        Pending
+                                    </option>
+
+                                    <option value="Valid">
+                                        Valid
+                                    </option>
+
+                                    <option value="NotValid">
+                                        Not Valid
+                                    </option>
+
+                                    <option value="NotApplicable">
+                                        Not Applicable
+                                    </option>
+
+                                </select>
+
+                            </td>
+
+                            <td>
+
+                                <input type="text"
+                                       name="notes"
+                                       class="form-control"
+                                       value="@item.Notes" />
+
+                            </td>
+
+                            <td>
+
+                                <button class="btn btn-dark btn-sm">
+                                    Save
+                                </button>
+
+                            </td>
+
+                        </form>
+
+                        <td>
+
+                            <button type="button"
+                                    class="btn btn-outline-primary btn-sm"
+                                    onclick="explainRequirement(
+                                        '@item.ASVSRequirement.Title',
+                                        'result-@item.Id'
+                                    )">
+
+                                Explain with AI
+
+                            </button>
+
+                        </td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td colspan="6">
+
+                            <div id="result-@item.Id"
+                                 class="alert alert-light shadow-sm">
+
+                                AI explanation will appear here...
+
+                            </div>
+
+                        </td>
+
+                    </tr>
+                }
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+async function explainRequirement(
+    requirement,
+    resultId)
+{
+    const response = await fetch(
+        "/AI/Explain",
+        {
+            method: "POST",
+
+            headers: {
+                "Content-Type":
+                    "application/x-www-form-urlencoded"
+            },
+
+            body:
+                `requirement=${encodeURIComponent(requirement)}`
+        });
+
+    const data = await response.json();
+
+    document
+        .getElementById(resultId)
+        .innerHTML = data.explanation;
+}
+
+</script>
