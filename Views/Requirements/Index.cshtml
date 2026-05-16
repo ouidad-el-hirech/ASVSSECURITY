@@ -11,6 +11,43 @@
         </a>
     </div>
 
+    <!-- 🔍 SEARCH FORM (AJOUTÉ) -->
+    <form method="get"
+          class="row g-3 mb-4">
+
+        <div class="col-md-5">
+            <input type="text"
+                   name="search"
+                   class="form-control"
+                   placeholder="Search requirements..." />
+        </div>
+
+        <div class="col-md-4">
+            <select name="chapter"
+                    class="form-select">
+
+                <option value="">
+                    All Chapters
+                </option>
+
+                @foreach(var chapter in ViewBag.Chapters)
+                {
+                    <option value="@chapter">
+                        @chapter
+                    </option>
+                }
+
+            </select>
+        </div>
+
+        <div class="col-md-3">
+            <button class="btn btn-dark w-100">
+                Search
+            </button>
+        </div>
+
+    </form>
+
     <div class="card shadow-lg">
 
         <div class="card-body">
@@ -23,6 +60,7 @@
                         <th>Chapter</th>
                         <th>Title</th>
                         <th>Level</th>
+                        <th>Actions</th> <!-- AJOUTÉ -->
                     </tr>
                 </thead>
 
@@ -35,6 +73,27 @@
                         <td>@item.Chapter</td>
                         <td>@item.Title</td>
                         <td>@item.Level</td>
+
+                        <!-- ACTION BUTTONS (MODIFIÉ) -->
+                        <td class="d-flex gap-2">
+
+                            <a href="/Requirements/Details/@item.Id"
+                               class="btn btn-sm btn-outline-dark">
+                                Details
+                            </a>
+
+                            <a href="/Requirements/Edit/@item.Id"
+                               class="btn btn-sm btn-outline-primary">
+                                Edit
+                            </a>
+
+                            <a href="/Requirements/Delete/@item.Id"
+                               class="btn btn-sm btn-outline-danger">
+                                Delete
+                            </a>
+
+                        </td>
+
                     </tr>
                 }
 
